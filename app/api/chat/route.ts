@@ -1,3 +1,14 @@
+import { NextResponse } from "next/server";
+
+export async function POST(req: Request) {
+  const { text } = await req.json();
+
+  // temporary fake AI response (we'll upgrade later)
+  const improved = `Better version: ${text} (more clear and structured)`;
+
+  return NextResponse.json({ improved });
+}
+
 import { Ollama } from "ollama";
 
 const ollama = new Ollama({
