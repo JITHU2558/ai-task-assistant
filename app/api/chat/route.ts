@@ -17,6 +17,22 @@ const ollama = new Ollama({
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
+  const systemPrompt = {
+  role: "system",
+  content: `
+You are BNutt, an AI assistant.
+
+When user asks to create a task, respond ONLY in JSON format:
+
+{
+  "type": "task",
+  "title": "short task title",
+  "time": "optional time"
+}
+
+If not a task, respond normally.
+`,
+};
 
   const stream = await ollama.chat({
   model: "llama3",
