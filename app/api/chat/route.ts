@@ -1,14 +1,3 @@
-import { NextResponse } from "next/server";
-
-export async function POST(req: Request) {
-  const { text } = await req.json();
-
-  // temporary fake AI response (we'll upgrade later)
-  const improved = `Better version: ${text} (more clear and structured)`;
-
-  return NextResponse.json({ improved });
-}
-
 import { Ollama } from "ollama";
 
 const ollama = new Ollama({
@@ -17,9 +6,11 @@ const ollama = new Ollama({
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
+
+  // 🧠 SYSTEM PROMPT (TASK LOGIC)
   const systemPrompt = {
-  role: "system",
-  content: `
+    role: "system",
+    content: `
 You are BNutt, an AI assistant.
 
 When user asks to create a task, respond ONLY in JSON format:
@@ -32,11 +23,15 @@ When user asks to create a task, respond ONLY in JSON format:
 
 If not a task, respond normally.
 `,
-};
+  };
 
+  // ✅ Inject system prompt
+  const finalMessages = [systemPrompt, ...messages];
+
+  // 🔁 STREAM RESPONSE
   const stream = await ollama.chat({
-  model: "llama3",
-    messages,
+    model: "llama3",
+    messages: finalMessages,
     stream: true,
   });
 
