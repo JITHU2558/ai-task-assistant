@@ -15,6 +15,17 @@ export default function Chat() {
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
+  // LOAD tasks
+useEffect(() => {
+  const saved = localStorage.getItem("bnutt_tasks");
+  if (saved) setTasks(JSON.parse(saved));
+}, []);
+
+// SAVE tasks
+useEffect(() => {
+  localStorage.setItem("bnutt_tasks", JSON.stringify(tasks));
+}, [tasks]);
+
   // LOAD
   useEffect(() => {
     const savedMemory = localStorage.getItem("bnutt_memory");
