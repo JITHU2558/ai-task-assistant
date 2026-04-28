@@ -1,69 +1,101 @@
-# AI Task Assistant
+# 🚀 BNutt AI – Smart AI Assistant with Task Management
 
-## 🚀 Description
-
-AI Task Assistant is a web application that helps users create and improve tasks using AI.
-
-Instead of just chatting, the app focuses on making tasks clearer, more structured, and actionable.
+BNutt AI is a full-stack AI-powered assistant built using Next.js, Supabase, and local AI models. It combines conversational AI with task management, allowing users to interact naturally while automatically creating and managing tasks.
 
 ---
 
 ## ✨ Features
 
-* Input a task
-* Improve task using AI
-* Simple chat-style interface
-* Real-time response
+* 💬 Real-time AI chat (streaming responses)
+* 🧠 Local AI integration (Ollama – llama3)
+* 🔐 User authentication (Supabase Auth)
+* 📝 AI-powered task creation
+* 📦 Task storage with database (Supabase)
+* ✅ Task management (Create, Update, Delete)
+* 🧑‍💻 Multi-user support with secure access (RLS)
+* 📄 Markdown rendering in chat
 
 ---
 
-## 🧠 Example
+## 🏗️ Tech Stack
 
-**Input:**
-"study python"
-
-**AI Output:**
-"Study Python basics such as loops and functions for 1 hour"
-
----
-
-## 🛠 Tech Stack
-
-* Next.js (Frontend)
-* JavaScript / TypeScript
-* OpenAI API
+* **Frontend:** Next.js (App Router), React, Tailwind CSS
+* **Backend:** Next.js API routes
+* **Database:** Supabase (PostgreSQL)
+* **Auth:** Supabase Auth
+* **AI Model:** Ollama (llama3, local)
+* **Deployment:** Vercel
 
 ---
 
-## ⚙️ How to Run
+## 📁 Project Structure
 
-```bash
-npm install
-npm run dev
+```
+ai-assistant/
+├── app/
+│   ├── api/chat/route.ts
+│   ├── login/page.tsx
+│   ├── Chat.tsx
+│   ├── page.tsx
+│   ├── layout.tsx
+│   └── globals.css
+├── lib/
+│   └── supabase.ts
+├── public/
+├── .env.local
+├── package.json
+└── README.md
 ```
 
-Open http://localhost:3000 in your browser.
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+```
 
 ---
 
-## 🎯 Project Goal
+## 🧠 How It Works
 
-This project demonstrates:
-
-* working with AI APIs
-* building interactive UI
-* handling user input and responses
-
----
-
-## 🔮 Future Improvements
-
-* Add backend (FastAPI)
-* Save task history
-* Add task manager features
+1. User sends message via chat UI
+2. Message is sent to `/api/chat`
+3. AI model (Ollama) generates response
+4. Response is streamed back to UI
+5. If structured task is detected → saved to database
 
 ---
 
-## 👨‍💻 Author
+## 🔒 Security
 
-JITHU
+* Row Level Security (RLS) enabled
+* Users can only access their own tasks
+* Secure Supabase authentication
+
+---
+
+## ⚠️ Limitations
+
+* Ollama works locally (not deployable on Vercel)
+* No long-term memory yet
+* Limited AI capability compared to GPT-4
+
+---
+
+## 🚀 Future Improvements
+
+* Add AI memory (conversation history)
+* Integrate external APIs (weather, calendar, etc.)
+* Replace local AI with hosted model
+* Mobile app version
+* Smart task prioritization
+
+---
+
+## 🧑‍💻 Author
+
+Built by Jithin P Biju
